@@ -1,18 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>WebGL Demo</title>
-    <link rel="stylesheet" href="./webgl.css" type="text/css" />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
-      integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
-      crossorigin="anonymous"
-      defer></script>
-    <script src="webgl-demo.js" type="module"></script>
-  </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Screenshot</title>
+</head>
+<body>
 
-  <body>
-    <canvas id="glcanvas" width="640" height="480"></canvas>
-  </body>
+<!-- This is the content you want to capture -->
+<div id="content">
+    <h1>Web Page to Share</h1>
+    <p>This is some content on the web page.</p>
+</div>
+
+<!-- Button to capture screenshot and share -->
+<button id="shareButton">Share Screenshot</button>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+document.getElementById('shareButton').addEventListener('click', async () => {
+    try {
+        // Capture the screenshot of the content
+        const canvas = await html2canvas(document.getElementById('content'));
+        const screenshot = canvas.toDataURL('image/png');
+
+        // Use the Web Share API to share the screenshot
+        if (navigator.share) {
+            await navigator.share({
+                title: 'Screenshot',
+                files: [new File([screenshot], 'screenshot.png', {type: 'image/png'})]
+            });
+        } else {
+            throw new Error('Web Share API is not supported in this browser.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle errors
+    }
+});
+</script>
+</body>
 </html>
