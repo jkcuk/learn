@@ -46,8 +46,8 @@
                     await navigator.share({
                         title: 'Shared Image',
                         text: 'Check out this image rendered using Three.js!',
-                        // url: imageURI,
-                        files: [new File([imageURI], 'test.png', {type: 'image/png'})]
+                        url: imageURI,
+                        // files: [new File([imageURI], 'test.png', {type: 'image/png'})]
                     });
                 } else {
                     alert('Web Share API is not supported in this browser.');
