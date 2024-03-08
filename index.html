@@ -46,7 +46,7 @@
                     await navigator.share({
                         title: 'Shared Image',
                         text: 'Check out this image rendered using Three.js!',
-                        url: imageURI,
+                        // url: imageURI,
                         files: [new File([imageURI], 'test.png', {type: 'image/png'})]
                     });
                 } else {
