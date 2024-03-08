@@ -40,7 +40,14 @@
             try {
                 // Render the scene to an image
                 const imageURI = renderer.domElement.toDataURL('image/png');
-
+                const blob = await (await fetch(base64url)).blob();
+const file = new File([blob], 'fileName.png', { type: blob.type });
+navigator.share({
+  title: 'Hello',
+  text: 'Check out this image!',
+  files: [file],
+});
+/*
                 // Use Web Share API to share the image
                 if (navigator.share) {
                     await navigator.share({
@@ -49,6 +56,7 @@
                         url: imageURI,
                         // files: [new File([imageURI], 'test.png', {type: 'image/png'})]
                     });
+                    */
                 } else {
                     alert('Web Share API is not supported in this browser.');
                 }
