@@ -40,7 +40,7 @@
             try {
                 // Render the scene to an image
                 const imageURI = renderer.domElement.toDataURL('image/png');
-                const blob = await (await fetch(base64url)).blob();
+                const blob = await (await fetch(imageURI)).blob();
 const file = new File([blob], 'fileName.png', { type: blob.type });
 navigator.share({
   title: 'Hello',
