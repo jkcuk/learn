@@ -39,14 +39,15 @@
         document.getElementById('share-button').addEventListener('click', async () => {
             try {
                 // Render the scene to an image
-                const imageURI = renderer.domElement.toDataURL();
+                const imageURI = renderer.domElement.toDataURL('image/png');
 
                 // Use Web Share API to share the image
                 if (navigator.share) {
                     await navigator.share({
                         title: 'Shared Image',
                         text: 'Check out this image rendered using Three.js!',
-                        url: imageURI
+                        url: imageURI,
+                        files: [new File([imageURI], 'test.png', {type: 'image/png'})]
                     });
                 } else {
                     alert('Web Share API is not supported in this browser.');
